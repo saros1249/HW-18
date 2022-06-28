@@ -2,24 +2,33 @@
 
 from flask_restx import Resource, Namespace
 
-film_ns = Namespace('film')
-director_ns = Namespace('director')
-genre_ns = Namespace('genre')
 
 
-@book_ns.route('/')
-class BooksView(Resource):
+@genres_ns.route('/')
+class GenreView(Resource):
     def get(self):
          return '', 200
 
-    def get_one(self, fid):
-        return '', 200
 
     def post(self):
          return '', 201
 
-    def patch(self, fid):
+
+
+@genre_ns.route('/<int:gid>')
+class GenreView(Resource):
+    def get_one(self, gid):
+        return '', 200
+
+    def put(self, gid):
         return '', 201
+
+    def patch(self, gid):
+        return '', 201
+
+
+
+
 
 
 
