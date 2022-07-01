@@ -2,15 +2,9 @@ from dao.model.models import Movie
 
 
 class MovieDAO:
-    def get_movies(self):
+    def get_movies(self, var):
         movies = Movie.query.all()
         return movies
-
-    def get_movies_by_director(self, director):
-        pass
-
-    def get_movies_by_genre(self, genre):
-        pass
 
     def get_movies_by_year(self,year):
         pass

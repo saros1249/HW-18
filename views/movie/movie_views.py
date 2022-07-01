@@ -7,7 +7,10 @@ from flask_restx import Resource, Namespace
 @movies_ns.route('/')
 class MovieView(Resource):
     def get(self):
-         return '', 200
+        director_id = request.args.get('director_id')
+        genre_id = request.args.get('genre_id')
+        year = request.args.get('year')
+        return '', 200
 
 
     def post(self):
