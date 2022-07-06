@@ -2,10 +2,10 @@ from dao.model.models import Movie
 
 
 class MovieDAO:
-    def __int__(self, session):
+    def __init__(self, session):
         self.session = session
 
-    def get_movies(self, mid=None, **kwargs):
+    def get(self, mid=None, **kwargs):
         query = self.session.query(Movie)
 
         if kwargs:

@@ -7,4 +7,4 @@ class MovieService:
         self.dao = dao
 
     def get_movies(self, mid=None, **kwargs):
-        return self.dao.get_movies(mid)
+        return self.dao.get(mid)
