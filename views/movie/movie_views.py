@@ -1,16 +1,18 @@
 # здесь контроллеры/хендлеры/представления для обработки запросов (flask ручки). сюда импортируются сервисы из пакета service
-
+from flask import request
 from flask_restx import Resource, Namespace
 
+from dao.model.schemas import MovieSchema
+from service.movie_service import MovieService
 
+movie_ns = Namespace('movies')
 
-@movies_ns.route('/')
+@movie_ns.route('/')
 class MovieView(Resource):
     def get(self):
-        director_id = request.args.get('director_id')
-        genre_id = request.args.get('genre_id')
-        year = request.args.get('year')
-        return '', 200
+        schema = MovieSchema(many=True)
+        movies = schema.dump(MovieService.get_movies(**request.args))
+        return movies, 200
 
 
     def post(self):
@@ -26,7 +28,7 @@ class MovieView(Resource):
     def put(self, mid):
         return '', 201
 
-    def patch(self, ,mid):
+    def patch(self, mid):
         return '', 201
 
 

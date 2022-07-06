@@ -19,11 +19,3 @@ class DirectorSchema(Schema):
 class GenreSchema(Schema):
     id = fields.Int()
     name = fields.Str()
-
-
-movies_schema = MovieSchema(many=True)
-movie_schema = MovieSchema()
-directors_schema = DirectorSchema(many=True)
-director_schema = DirectorSchema()
-genres_schema = GenreSchema(many=True)
-genre_schema = GenreSchema()

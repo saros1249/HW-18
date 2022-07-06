@@ -2,12 +2,21 @@ from dao.model.models import Movie
 
 
 class MovieDAO:
-    def get_movies(self, var):
-        movies = Movie.query.all()
-        return movies
+    def __int__(self, session):
+        self.session = session
 
-    def get_movies_by_year(self,year):
-        pass
+    def get_movies(self, mid=None, **kwargs):
+        query = self.session.query(Movie)
+
+        if kwargs:
+            for key, value in kwargs.items():
+                query = query.filter(eval(f'Movie.{key}') == int(value))
+
+        if mid:
+            movies = query.get(mid)
+        else:
+            movies = query.all()
+        return movies
 
     def get_one_movie(self, mid):
         pass
