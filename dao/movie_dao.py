@@ -8,27 +8,27 @@ class MovieDAO:
     def get(self, mid=None, **kwargs):
         query = self.session.query(Movie)
 
+        if mid:
+            return query.get(mid)
+
         if kwargs:
             for key, value in kwargs.items():
                 query = query.filter(eval(f'Movie.{key}') == int(value))
+        return query.all()
 
-        if mid:
-            movies = query.get(mid)
-        else:
-            movies = query.all()
-        return movies
+    def create(self, data):
+        new_movie = Movie(**data)
+        with self.session.begin():
+            self.session.add(new_movie)
+        return new_movie
 
-    def get_one_movie(self, mid):
-        pass
+    def update(self, movie):
+        self.session.add(movie)
+        self.session.commit()
 
-    def post_movie(self):
-        pass
-
-    def put_movie(self, mid):
-        pass
-
-    def patch_movie(self, mid):
-        pass
-
-    def delete_movie(self, mid):
-        pass
+    def delete(self, mid):
+        movie = self.get(mid)
+        if not movie:
+            return f'Фильм с ID{mid} не найден.', 404
+        self.session.delete(movie)
+        self.session.commit()
