@@ -1,34 +1,22 @@
-
-
 from flask_restx import Resource, Namespace
 
+from dao.model.schemas import DirectorSchema
+from implemented import director_service
+
+director_ns = Namespace('directors')
 
 
-@directors_ns.route('/')
+@director_ns.route('/')
 class DirectorView(Resource):
+    schema = DirectorSchema(many=True)
+
     def get(self):
-         return '', 200
-
-
-    def post(self):
-         return '', 201
-
+        return self.schema.dump(director_service.get_directors()), 200
 
 
 @director_ns.route('/<int:did>')
 class DirectorView(Resource):
-    def get_one(self, mid):
-        return '', 200
+    schema = DirectorSchema()
 
-    def put(self, did):
-        return '', 201
-
-    def patch(self, did):
-        return '', 201
-
-
-
-
-
-
-
+    def get(self, did):
+        return self.schema.dump(director_service.get_directors(did)), 200

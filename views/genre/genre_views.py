@@ -1,34 +1,22 @@
-# здесь контроллеры/хендлеры/представления для обработки запросов (flask ручки). сюда импортируются сервисы из пакета service
-
 from flask_restx import Resource, Namespace
 
+from dao.model.schemas import GenreSchema
+from implemented import genre_service
+
+genre_ns = Namespace('genres')
 
 
-@genres_ns.route('/')
+@genre_ns.route('/')
 class GenreView(Resource):
+    schema = GenreSchema(many=True)
+
     def get(self):
-         return '', 200
-
-
-    def post(self):
-         return '', 201
-
+        return self.schema.dump(genre_service.get_genres()), 200
 
 
 @genre_ns.route('/<int:gid>')
 class GenreView(Resource):
-    def get_one(self, gid):
-        return '', 200
+    schema = GenreSchema()
 
-    def put(self, gid):
-        return '', 201
-
-    def patch(self, gid):
-        return '', 201
-
-
-
-
-
-
-
+    def get(self, gid):
+        return self.schema.dump(genre_service.get_genres(gid)), 200
