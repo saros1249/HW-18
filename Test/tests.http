@@ -23,7 +23,7 @@ Accept: application/json
 
 ###
 
-PUT http://localhost:5000/movies/10
+PUT http://localhost:5000/movies/1
 Accept: application/json
 Content-Type: application/json
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 ###
 
-DELETE http://localhost:5000/movies/20
+DELETE http://localhost:5000/movies/19
 Accept: application/json
 
 ###

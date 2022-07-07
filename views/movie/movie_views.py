@@ -32,14 +32,16 @@ class MovieView(Resource):
         return self.schema.dump(movie_service.get_movies(mid)), 200
 
     def put(self, mid: int):
-        return self.schema.dump(movie_service.update_movie_full(mid, request.json)), 200
+        movie = self.schema.dump(movie_service.update_movie_full(mid, request.json))
+        return f'Запись с ID{mid} изменена на {movie}.', 200
 
     def patch(self, mid: int):
-        return self.schema.dump(movie_service.update_movie_partially(mid, request.json)), 200
+        movie = self.schema.dump(movie_service.update_movie_partially(mid, request.json))
+        return f'Запись с ID{mid} изменена на {movie}.', 200
 
     def delete(self, mid: int):
         movie_service.delete(mid)
-        return f'Фильм с ID{mid} успешно удалён.', 204
+        return 204
 
 
 

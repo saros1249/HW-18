@@ -48,6 +48,6 @@ class MovieDAO:
         """
         movie = self.get(mid)
         if not movie:
-            return f'Фильм с ID{mid} не найден.', 404
+            return 'Фильм не найден.', 404
         self.session.delete(movie)
         self.session.commit()
